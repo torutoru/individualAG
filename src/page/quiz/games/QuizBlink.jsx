@@ -26,8 +26,7 @@ const QuizBlink = () => {
       for (let j = 0; j < currentGame.row; j++) {
         const index = i * currentGame.row + j;
         rowContent.push(
-          <td key={index} style={{ width: '50px', height: '50px', textAlign: 'center', backgroundColor: index === blinkIndex ? 'black' : clickPositionList.includes(index) ? 'whitesmoke' : 'white' }} onClick={() => setClickPositionList([...clickPositionList, index])}>
-            {index}
+          <td key={index} style={{ width: '50px', height: '50px', textAlign: 'center', backgroundColor: index === blinkIndex ? 'black' : clickPositionList.includes(index) ? 'whitesmoke' : 'white' }} onClick={() => blinkIndex === -1 ? setClickPositionList([...clickPositionList, index]) : undefined}>
           </td>
         );
       }
@@ -62,6 +61,7 @@ const QuizBlink = () => {
         if (gameIndex === gameData.length - 1) {
           alert("축하합니다! 모든 게임을 완료했습니다.");
           setGameIndex(0);
+          setClickPositionList([]);
         } else {
           setClickPositionList([]);
           setGameIndex(gameIndex + 1);
@@ -92,6 +92,7 @@ const QuizBlink = () => {
         <select value={gameLevel} disabled={blinkIndex !== -1} onChange={(e) => changeGameLevel(Number(e.target.value))}>
           <option value={2}>2x2</option>
           <option value={3}>3x3</option>
+          <option value={4}>4x4</option>
         </select>
       </div>
       {gameData && <>

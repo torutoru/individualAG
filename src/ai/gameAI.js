@@ -15,7 +15,7 @@ const makeBlinkQuizData = async (level) => {
         gameList.push({
             row: row,
             blinkTime: blinkTime - (100 * i),
-            correct: blinkData,
+            correct: blinkData.splice(0, 4),
         });
     }
 
