@@ -1,10 +1,11 @@
 import { Grid } from "@mui/material";
+import { Link } from "react-router-dom";
 
 const Home = () => {
 
     return (
         <Grid container>
-            안녕하세요.
+            <h1><Link to={'/quiz_home'}>퀴즈...</Link></h1>
         </Grid>
     );
 };

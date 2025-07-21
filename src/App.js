@@ -1,15 +1,20 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from './page/Home';
 import NotFound from './page/NotFound';
-
+import QuizBlink from './page/quiz/games/QuizBlink';
+import QuizHome from './page/quiz/QuizHome';
+import QuizLayout from './page/quiz/QuizLayout';
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/quiz_home" element={<QuizHome />} />
+        <Route path="/quiz" element={<QuizLayout />}>
+          <Route path="blink" element={<QuizBlink />} />
+        </Route>
         <Route path="*" element={<NotFound />} />
-        
       </Routes>
     </BrowserRouter>
   );
