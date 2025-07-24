@@ -1,6 +1,4 @@
-import Cookie from 'js-cookie';
 import { HfInference } from '@huggingface/inference';
-const hf = new HfInference(Cookie.get('hf_key') || '');
 
 const analyzeImage = async (image) => {
     // const arrayBuffer = await image.arrayBuffer();
@@ -22,6 +20,7 @@ const analyzeImage = async (image) => {
 
 const createRandomImage = async (desc) => {
     try {
+        const hf = new HfInference(sessionStorage.getItem('hf_key') || '');
         const blob = await hf.textToImage({
             inputs: desc,
             model: 'black-forest-labs/FLUX.1-dev',
