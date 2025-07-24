@@ -4,6 +4,7 @@ import NotFound from './page/NotFound';
 import QuizBlink from './page/quiz/games/QuizBlink';
 import QuizHome from './page/quiz/QuizHome';
 import QuizLayout from './page/quiz/QuizLayout';
+import QuizRecognition from './page/quiz/games/QuizRecognition';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Route path="/quiz_home" element={<QuizHome />} />
         <Route path="/quiz" element={<QuizLayout />}>
           <Route path="blink" element={<QuizBlink />} />
+          <Route path="recognition" element={<QuizRecognition />} />
         </Route>
         <Route path="*" element={<NotFound />} />
       </Routes>
