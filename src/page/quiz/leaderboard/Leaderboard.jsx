@@ -139,7 +139,7 @@ const Leaderboard = () => {
         {/* 상단 타이틀 바 */}
         <Box
           sx={{
-            mt: 2,
+            mt: 1,
             p: '10px',
             bgcolor: '#267FE0',
             display: 'flex',
@@ -162,7 +162,7 @@ const Leaderboard = () => {
             display: 'flex',
             justifyContent: 'center',
             px: 0,
-            py: 2,
+            py: 1,
             borderBottomLeftRadius: '10px',
             borderBottomRightRadius: '10px',
           }}
