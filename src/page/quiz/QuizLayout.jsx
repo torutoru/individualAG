@@ -2,7 +2,6 @@
 import React from 'react';
 import {Outlet, useNavigate} from 'react-router-dom';
 import {
-  AppBar,
   Box,
   Container,
 } from '@mui/material';
@@ -38,9 +37,7 @@ const QuizLayout = () => {
       }}
     >
       {/* 상단 헤더 */}
-      <AppBar position="sticky" elevation={0} color="primary">
-        <AppHeader title={tab.toUpperCase()} onBack={() => window.history.back()}/>
-      </AppBar>
+      <AppHeader title={tab.toUpperCase()} onBack={() => window.history.back()}/>
 
       {/* 메인 컨텐츠 (AppBar와 BottomBar 사이 여백 확보) */}
       <Container sx={{flex: 1, width: '100%', pt: 2, pb: 10}}>

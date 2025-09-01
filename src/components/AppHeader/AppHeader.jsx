@@ -1,6 +1,6 @@
 import React from 'react';
 import {AppBar, Toolbar, IconButton, Typography, Box} from '@mui/material';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import ArrowBackIosNewRoundedIcon from '@mui/icons-material/ArrowBackIosNewRounded';
 import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
 import {useNavigate} from 'react-router-dom'
 
@@ -11,12 +11,20 @@ const AppHeader = ({title = '', onBack}) => {
     navigate('/profile');
   };
 
+  // 테스트 코드 - 뒤로가기 버튼 숨기기
+  const isTest = true;
+
   return (
     <AppBar position="sticky" elevation={0} sx={{bgcolor: 'background.default'}}>
-      <Toolbar sx={{minHeight: 64}}>
+      <Toolbar>
+{/*        <Box sx={{width: 48}}>
+          {onBack && (<IconButton onClick={onBack} sx={{color: 'text.primary'}}>
+            <ArrowBackIosNewRoundedIcon/>
+          </IconButton>)}
+        </Box>*/}
         <Box sx={{width: 48}}>
-          {onBack && (<IconButton onClick={onBack} size="small" sx={{color: 'text.primary'}}>
-            <ArrowBackIcon/>
+          {!isTest && onBack && (<IconButton onClick={onBack} sx={{color: 'text.primary'}}>
+            <ArrowBackIosNewRoundedIcon/>
           </IconButton>)}
         </Box>
         <Typography
@@ -26,7 +34,7 @@ const AppHeader = ({title = '', onBack}) => {
           {title}
         </Typography>
         <Box sx={{width: 48, display: 'flex', justifyContent: 'flex-end'}}>
-          <IconButton onClick={() => handleRightClick()} size="small" sx={{color: 'text.primary'}}>
+          <IconButton onClick={() => handleRightClick()} sx={{color: 'text.primary'}}>
             <PersonOutlineIcon/>
           </IconButton>
         </Box>
