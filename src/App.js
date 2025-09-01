@@ -2,6 +2,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from './page/home/Home';
 import NotFound from './page/NotFound';
 import QuizBlink from './page/quiz/games/QuizBlink';
+import QuizBlink_V2 from './page/quiz/games/QuizBlink_V2';
 import QuizHome from './page/quiz/QuizHome';
 import QuizLayout from './page/quiz/QuizLayout';
 import QuizRecognition from './page/quiz/games/QuizRecognition';
@@ -22,6 +23,7 @@ function App() {
         </Route>
         <Route path="/quiz" element={<QuizLayout />}>
           <Route path="blink" element={<QuizBlink />} />
+          <Route path="blink-v2" element={<QuizBlink_V2 />} />
           <Route path="recognition" element={<QuizRecognition />} />
           <Route path="leader-board" element={<Leaderboard />} />
           <Route path="stats" element={<Stats />} />

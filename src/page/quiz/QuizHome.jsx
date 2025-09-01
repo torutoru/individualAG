@@ -50,6 +50,13 @@ const QuizHome = () => {
             score={23}
           />
           <GameListItem
+            icon={<PsychologyIcon />}
+            title="Blink 기억력 게임(V2)"
+            subtitle="기억력"
+            onClick={() => handleClick('/quiz/blink-v2')}
+            score={58}
+          />
+          <GameListItem
             icon={<FaceRetouchingNaturalIcon />}
             title="얼굴 인식"
             subtitle="기억력"
