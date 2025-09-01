@@ -12,6 +12,7 @@ import ExtensionIcon from '@mui/icons-material/Extension';
 
 // 홈 상단 이미지
 import topImgHomeMain from '../../assets/img/top-img-home-main.png';
+import {useNavigate} from 'react-router-dom'
 
 /**
  * TODO:
@@ -22,10 +23,12 @@ import topImgHomeMain from '../../assets/img/top-img-home-main.png';
  * @constructor
  */
 const QuizHome = () => {
+  const navigate = useNavigate();
+
   const bgUrl = topImgHomeMain;
 
   const handleClick = (path) => {
-    console.log('QuizHome handleClick:', path);
+    navigate(path);
   };
 
   return (
