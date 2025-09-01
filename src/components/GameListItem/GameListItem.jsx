@@ -24,7 +24,7 @@ const GameListItem = ({ icon, title, subtitle, score, onClick }) => {
         gap: 2,
         bgcolor: 'background.paper',
         cursor: onClick ? 'pointer' : 'default',
-        '&:hover': { bgcolor: 'secondary.main' },
+        '&:hover': { bgcolor: '#C0E3E6' },
       }}
     >
       <Avatar
@@ -32,7 +32,7 @@ const GameListItem = ({ icon, title, subtitle, score, onClick }) => {
         sx={{
           width: 48,
           height: 48,
-          bgcolor: 'secondary.main',
+          bgcolor: '#FEE0A5',
           color: 'text.primary',
         }}
       >
@@ -50,7 +50,7 @@ const GameListItem = ({ icon, title, subtitle, score, onClick }) => {
         <Typography variant="body2" sx={{ fontWeight: 700, color: 'text.primary' }}>
           {score}
         </Typography>
-        <Box component="span" sx={{ color: 'text.secondary' }}>{'>'}</Box>
+        <Box component="span" sx={{ color: 'text.secondary' }}>{'%'}</Box>
       </Box>
     </Paper>
   );
