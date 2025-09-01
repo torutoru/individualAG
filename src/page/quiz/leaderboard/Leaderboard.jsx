@@ -4,33 +4,43 @@ import {
   Box,
   Container,
   Grid,
-  List,
-  ListItem,
-  ListItemAvatar,
-  ListItemText,
   Paper,
   Typography,
 } from '@mui/material';
+import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 
 const medalColor = {
-  1: '#ffd700',
-  2: '#c0c0c0',
-  3: '#cd7f32',
+  1: '#ffd700', // gold
+  2: '#c0c0c0', // silver
+  3: '#cd7f32', // bronze
 };
 
-const TopRank = ({ rank, name, score, src, size = 96 }) => (
+/** 상단 1~3위: 트로피 아이콘 + 날짜 + 점수 */
+const TopRank = ({ rank, dateLabel, score, size = 96 }) => (
   <Box sx={{ display: 'flex', alignItems: 'center', flexDirection: 'column', gap: 1 }}>
     <Box sx={{ position: 'relative' }}>
+      {/* 트로피가 들어간 원형 배지 */}
       <Avatar
-        src={src}
-        alt={name}
         sx={{
           width: size,
           height: size,
+          bgcolor: 'background.default',
           border: '4px solid',
           borderColor: medalColor[rank] || 'transparent',
+          display: 'grid',
+          placeItems: 'center',
         }}
-      />
+      >
+        <EmojiEventsIcon
+          sx={{
+            fontSize: size * 0.55,
+            color: medalColor[rank] || 'text.secondary',
+            filter: 'drop-shadow(0 2px 4px rgba(0,0,0,.25))',
+          }}
+        />
+      </Avatar>
+
+      {/* 랭크 배지 */}
       <Box
         sx={{
           position: 'absolute',
@@ -49,12 +59,21 @@ const TopRank = ({ rank, name, score, src, size = 96 }) => (
         {rank}
       </Box>
     </Box>
-    <Typography variant="body2" sx={{ fontWeight: 700 }}>{name}</Typography>
-    <Typography variant="caption" sx={{ color: 'text.secondary' }}>{score}</Typography>
+
+    {/* 날짜 라벨 */}
+    <Typography variant="body2" sx={{ fontWeight: 700, textAlign: 'center' }}>
+      {dateLabel}
+    </Typography>
+
+    {/* 점수 */}
+    <Typography variant="body1" sx={{ fontWeight: 700 }}>
+      {score}점
+    </Typography>
   </Box>
 );
 
-const Row = ({ rank, name, score, src, highlight = false }) => (
+/** 4위 이상: 아바타 제거, 왼쪽 등수 + 가운데 날짜 + 오른쪽 점수 */
+const Row = ({ rank, dateLabel, score, highlight = false }) => (
   <Paper
     elevation={0}
     sx={{
@@ -63,68 +82,113 @@ const Row = ({ rank, name, score, src, highlight = false }) => (
       alignItems: 'center',
       justifyContent: 'space-between',
       bgcolor: highlight ? 'secondary.main' : 'background.paper',
-      border: highlight ? '2px solid' : 'none',
-      borderColor: highlight ? 'primary.main' : 'transparent',
+      border: highlight ? '2px solid' : '1px solid',
+      borderColor: highlight ? 'primary.main' : 'divider',
+      borderRadius: 2,
     }}
   >
-    <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-      <Typography sx={{ width: 24, textAlign: 'center', color: highlight ? 'text.primary' : 'text.secondary', fontWeight: 700 }}>
+    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
+      <Typography
+        sx={{
+          width: 28,
+          textAlign: 'center',
+          color: highlight ? 'text.primary' : 'text.secondary',
+          fontWeight: 800,
+        }}
+      >
         {rank}
       </Typography>
-      {src ? (
-        <Avatar src={src} sx={{ width: 40, height: 40, border: highlight ? '2px solid' : '2px solid transparent', borderColor: 'primary.main' }} />
-      ) : (
-        <Avatar sx={{ width: 40, height: 40, bgcolor: 'secondary.main', fontWeight: 700 }}>
-          {name?.[0] ?? 'U'}
-        </Avatar>
-      )}
-      <Typography sx={{ fontWeight: highlight ? 800 : 600 }}>{name}</Typography>
+
+      {/* 날짜만 표기 */}
+      <Typography sx={{ fontWeight: highlight ? 800 : 600 }}>
+        {dateLabel}
+      </Typography>
     </Box>
+
     <Typography sx={{ fontWeight: 900, color: 'primary.main' }}>{score}</Typography>
   </Paper>
 );
 
 const Leaderboard = () => {
-  const [tab, setTab] = React.useState('stats');
+  // 데모용 더미 데이터 (날짜/점수)
+  const podium = [
+    { rank: 2, dateLabel: '2025-08-31 (일)', score: 1200 },
+    { rank: 1, dateLabel: '2025-09-01 (월)', score: 1250 },
+    { rank: 3, dateLabel: '2025-08-28 (목)', score: 1150 },
+  ];
+
+  const others = [
+    { rank: 4, dateLabel: '2025-08-26 (화)', score: 1100 },
+    { rank: 5, dateLabel: '2025-08-24 (일)', score: 1050 },
+    { rank: 6, dateLabel: '2025-08-20 (수)', score: 1000 },
+    { rank: 7, dateLabel: '2025-08-18 (월)', score: 950 },
+    { rank: 8, dateLabel: '2025-08-19 (월)', score: 850 },
+    { rank: 9, dateLabel: '2025-08-20 (화)', score: 750 },
+    { rank: 10, dateLabel: '2025-08-21 (수)', score: 650, highlight: true }, // 예: 개인 베스트 주간 하이라이트
+  ];
 
   return (
     <Box sx={{ minHeight: '100dvh', bgcolor: 'background.default', display: 'flex', flexDirection: 'column' }}>
       <Container sx={{ pb: 8 }}>
-        <Grid container spacing={3} sx={{ mt: 1 }}>
+        <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+          <Typography variant="h5" fontWeight={800}>
+            홍길동, 72세 성적표
+          </Typography>
+        </Box>
+
+        {/* 상단 타이틀 바 */}
+        <Box
+          sx={{
+            mt: 2,
+            p: '10px',
+            bgcolor: '#267FE0',
+            display: 'flex',
+            justifyContent: 'center',
+            borderTopLeftRadius: '10px',
+            borderTopRightRadius: '10px',
+          }}
+        >
+          <Typography variant="h5" fontWeight={800} color="black">
+            최고의 성적
+          </Typography>
+        </Box>
+
+        {/* 1~3위 트로피 그리드 */}
+        <Grid
+          container
+          spacing={3}
+          sx={{
+            bgcolor: '#267FE0',
+            display: 'flex',
+            justifyContent: 'center',
+            px: 0,
+            py: 2,
+            borderBottomLeftRadius: '10px',
+            borderBottomRightRadius: '10px',
+          }}
+        >
           <Grid item xs={4} sx={{ display: 'flex', justifyContent: 'center' }}>
-            <TopRank
-              rank={2}
-              name="Olivia B."
-              score={1200}
-              src="https://lh3.googleusercontent.com/aida-public/AB6AXuBki7QRszrtWPmfw8kIdieVj7cDUf9tNlocFO7CNVHWKmyLZsFEoc5ERHFnGGyfZM3v3ccVSSop62Bc9m4QkID6E8OtxjJfGUyfXbrx-T7zEwhgFObYWhbJOSyWd9_nwsLsm8ix-4Jml367zWx5Dd-0stCIe3QL-mbJ3cNityzvZefPZDJSdB2PQyOTKEfG5XLhHwLijbRNGchsLq3s_Lm8l6Qm63U3iN3TCUY-GGNr66SwfZlTt9C6l4CEIsYN0ecTKcSoyq4VcP3i"
-              size={80}
-            />
+            <TopRank rank={podium[0].rank} dateLabel={podium[0].dateLabel} score={podium[0].score} size={80} />
           </Grid>
           <Grid item xs={4} sx={{ display: 'flex', justifyContent: 'center' }}>
-            <toprank
-              rank={1}
-              name="ethan c."
-              score={1250}
-              src="https://lh3.googleusercontent.com/aida-public/ab6axucqjzn1nmpzwdbprilhptpcdg2wfpbz3jzxcij3likn9e9vvlfefvvgq838lp-v3rvclsdbxet6y5nzlufqv1ovsyahi_j2f0edd_f3lb4nacc87yzlupvb44hodhxlyijk60vj4mfttxjvi8ysacrjpqbvqwyiiiiqhxa1_9cpai5tp5dlko8muwnq_wtngj9et9niy15s9kadyoagx_leqqk15ywtqjaxbb25mpbwhuqrahmtk2gotp35libr0xpvzhgkv2qttdr4"
-              size={96}
-            />
+            <TopRank rank={podium[1].rank} dateLabel={podium[1].dateLabel} score={podium[1].score} size={96} />
           </Grid>
           <Grid item xs={4} sx={{ display: 'flex', justifyContent: 'center' }}>
-            <TopRank
-              rank={3}
-              name="Noah T."
-              score={1150}
-              src="https://lh3.googleusercontent.com/aida-public/AB6AXuBBmhay255x07d_Wk0zx3zc3fWMGYS5x7EWsYdXCWhGm4kfhhUWokizvE-Ktj_RAkDx7PCfsoQYZJtj83HmDvbXTUv7NadJfTLdY7UeIHjgzcK1N48e_Jnj3pPawb0S612WbGyVeP4b43nvguZuYgjQX4BdoV-qa6WoFesYBKlEtJuAVlB35WRa6nKyY8rTeX_UHJ1bUB4LfD6JVGwBzvha7TCRVfZNbJEOUE5pep1JfU5WZbqf9K7KYPIN51dx639RqL1aVR6aszIk"
-              size={80}
-            />
+            <TopRank rank={podium[2].rank} dateLabel={podium[2].dateLabel} score={podium[2].score} size={80} />
           </Grid>
         </Grid>
 
+        {/* 4위 이하 목록 */}
         <Box sx={{ mt: 3, display: 'grid', gap: 1.25 }}>
-          <Row rank={4} name="Ava Harper" score={1100} src="https://lh3.googleusercontent.com/aida-public/AB6AXuAg2Dgp__7JU4BlO2WZx_2qHUOrMo4DCfszykWH94_25kM_CPc7Ok8LFCvbMBxIl1NS5DvYiCUR1Wsa0OGmXntKLe4yqRSIlzT5zWqJ54Khmbkk6_1IU-8CMUMNNcMGoTxv7jq0k81ZJuF0haSvVB8ofiDxRP0I4scs_KzzOxV2Mo6U2q3m7ylpd21zJkmB3r2Wuxz7WMSMDue6A6Hw2sg1Bm0-PVN77B_xlalJE8tPcBoSiQ4XIfX2jYy9GSDs9IZvfwQ5LAC_uev9" />
-          <Row rank={5} name="Liam Foster" score={1050} src="https://lh3.googleusercontent.com/aida-public/AB6AXuDpoORqlidQ9121eGVbQc5Fkxk211bdr8Gi7NB7b-CFhIw5G78dWCScG7MDajHOAzvmMHfIuxzHVco76rTVg4eit7yTemmMw5DvRAmwA5FaW1KAJMPhgDxTbahDGRjPOLoRfjtsodZvvLGdXqEFCMPJtSUijhLadJH_zzVfAsm0peWn6F5i2DY-JSqpxk2rMhfBXemnuzfGwE-HcBjbrAYW_qDQbpLgenhdbTLA_xMzo2ueZmQ519seFL5qAOA655FT2-EorGPd4HZY" />
-          <Row rank={6} name="User 6" score={1000} />
-          <Row rank={7} name="You" score={950} src="https://lh3.googleusercontent.com/aida-public/AB6AXuCq1QfcPO4IJO6G-8_9xx6tR0_lLs5C8PzVz2BSWVTnGDemIDrU436I6hoxygCBL0YI6B7h3VMLGo_jGP1Ix_eMwb55hOiqnwyyEifDtwmWeTrWwtXO8Bi49diwaCQPvXdUuPMXAAAoP81YnhL6l4xBLVuMUmZ8eMCpf_WBN7_uRa-kFFmXhqoQAr5Ter7uBR67jDmNhYI5JEIfAC5TeBhBl_wBMVKE0i2Dq0bDQ7rYyrb3KB6_mVmtoK5vfEPlHlz_m14hL-410vm" highlight />
+          {others.map((item) => (
+            <Row
+              key={item.rank}
+              rank={item.rank}
+              dateLabel={item.dateLabel}
+              score={item.score}
+              highlight={item.highlight}
+            />
+          ))}
         </Box>
       </Container>
     </Box>
