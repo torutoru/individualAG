@@ -9,7 +9,7 @@ import ChevronRightRoundedIcon from '@mui/icons-material/ChevronRightRounded';
 import { useNavigate } from 'react-router-dom';
 
 const Settings = () => {
-  const nav = useNavigate();
+  const navigate = useNavigate();
 
   // 토글 상태 (샘플)
   const [contrastMode, setContrastMode] = useState(false);
@@ -38,7 +38,7 @@ const Settings = () => {
             </Typography>
             <Paper variant="outlined" sx={cardSx}>
               <List disablePadding>
-                <ListItemButton onClick={() => {/* 이동: 이름/나이 편집 */}}>
+                <ListItemButton onClick={() => {navigate('/profile')}}>
                   <ListItemText primary="이름/나이" />
                   <ChevronRightRoundedIcon color="action" />
                 </ListItemButton>
@@ -48,7 +48,7 @@ const Settings = () => {
                   <ChevronRightRoundedIcon color="action" />
                 </ListItemButton>
                 <Divider />
-                <ListItemButton onClick={() => {/* 이동: 프로필 사진 변경 */}}>
+                <ListItemButton onClick={() => {navigate('/profile')}}>
                   <ListItemText primary="프로필 사진 변경" />
                   <ChevronRightRoundedIcon color="action" />
                 </ListItemButton>
