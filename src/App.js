@@ -9,9 +9,8 @@ import QuizRecognition from './page/quiz/games/QuizRecognition';
 
 import Profile from './page/profile/Profile';
 import Leaderboard from './page/quiz/leaderboard/Leaderboard'
-import Stats from './page/quiz/stats/Stats'
 import Settings from './page/Settings/Settings'
-import MyProgress from './page/myProgress/MyProgress'
+import Stats from './page/quiz/stats/Stats'
 
 
 function App() {
@@ -28,7 +27,7 @@ function App() {
           <Route path="blink-v2" element={<QuizBlink_V2 />} />
           <Route path="recognition" element={<QuizRecognition />} />
           <Route path="leader-board" element={<Leaderboard />} />
-          <Route path="stats" element={<MyProgress />} />
+          <Route path="stats" element={<Stats />} />
           <Route path="settings" element={<Settings />} />
         </Route>
         <Route path="*" element={<NotFound />} />

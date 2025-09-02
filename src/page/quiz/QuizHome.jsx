@@ -3,12 +3,14 @@ import { Box, Container, Stack, Typography } from '@mui/material';
 import GoalCard from '../../components/GoalCard/GoalCard';
 import GameListItem from '../../components/GameListItem/GameListItem';
 import SearchIcon from '@mui/icons-material/Search';
-import PsychologyIcon from '@mui/icons-material/Psychology';
+// import PsychologyIcon from '@mui/icons-material/Psychology';
 import SportsKabaddiIcon from '@mui/icons-material/SportsKabaddi';
 import FaceRetouchingNaturalIcon from '@mui/icons-material/FaceRetouchingNatural';
 import PanoramaIcon from '@mui/icons-material/Panorama';
 import TranslateIcon from '@mui/icons-material/Translate';
 import ExtensionIcon from '@mui/icons-material/Extension';
+import DashboardIcon from '@mui/icons-material/Dashboard';
+import StyleIcon from '@mui/icons-material/Style';
 
 // 홈 상단 이미지
 import topImgHomeMain from '../../assets/img/top-img-home-main.png';
@@ -43,14 +45,14 @@ const QuizHome = () => {
         <GoalCard title="오늘의 목표" percent={75} bgUrl={bgUrl} />
         <Stack spacing={1.5} sx={{ mt: 2, pb: 8 }}>
           <GameListItem
-            icon={<PsychologyIcon />}
+            icon={<DashboardIcon />}
             title="Blink 기억력 게임"
             subtitle="기억력"
             onClick={() => handleClick('/quiz/blink')}
             score={23}
           />
           <GameListItem
-            icon={<PsychologyIcon />}
+            icon={<DashboardIcon />}
             title="Blink 기억력 게임(V2)"
             subtitle="기억력"
             onClick={() => handleClick('/quiz/blink-v2')}
@@ -65,10 +67,17 @@ const QuizHome = () => {
           />
           <GameListItem
             icon={<SportsKabaddiIcon />}
-            title="가위 바위 보"
-            subtitle="기억력"
+            title="역가위바위보"
+            subtitle="인지 영역"
             onClick={() => handleClick('/quiz/rock-paper')}
             score={92}
+          />
+          <GameListItem
+            icon={<StyleIcon />}
+            title="카드 페어 매칭"
+            subtitle="기억력"
+            onClick={() => handleClick('/quiz/rock-paper')}
+            score={32}
           />
           <GameListItem
             icon={<SearchIcon />}
