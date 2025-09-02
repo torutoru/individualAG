@@ -69,7 +69,7 @@ const QuizHome = () => {
             icon={<SportsKabaddiIcon />}
             title="역가위바위보"
             subtitle="인지 영역"
-            onClick={() => handleClick('/quiz/rock-paper')}
+            onClick={() => handleClick('/quiz/rps-reverse')}
             score={92}
           />
           <GameListItem

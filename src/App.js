@@ -11,6 +11,7 @@ import Profile from './page/profile/Profile';
 import Leaderboard from './page/quiz/leaderboard/Leaderboard'
 import Settings from './page/Settings/Settings'
 import Stats from './page/quiz/stats/Stats'
+import RpsInhibitionGame from './page/quiz/games/RpsInhibitionGame/RpsInhibitionGame'
 
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
         <Route path="/quiz" element={<QuizLayout />}>
           <Route path="blink" element={<QuizBlink />} />
           <Route path="blink-v2" element={<QuizBlink_V2 />} />
+          <Route path="rps-reverse" element={<RpsInhibitionGame />} />
           <Route path="recognition" element={<QuizRecognition />} />
           <Route path="leader-board" element={<Leaderboard />} />
           <Route path="stats" element={<Stats />} />

@@ -2,8 +2,10 @@ import { useState } from 'react';
 import { Box, Typography, Button, CircularProgress, TextField } from '@mui/material';
 import axios from 'axios';
 
+// const API_ENDPOINT = "http://172.19.1.128/ai-review";
+const API_ENDPOINT = "http://172.19.1.128:3000/ask";
 // AI 요청 주소
-const API_ENDPOINT = "http://localhost:3001/ask";
+// const API_ENDPOINT = "http://localhost:3001/ask";
 
 const initialPrompt = `[사용자 신체 정보]
 - 성별: 남성
