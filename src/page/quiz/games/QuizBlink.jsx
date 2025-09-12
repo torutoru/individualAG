@@ -1,9 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { makeBlinkQuizData } from "../../../ai/gameAI";
 import { Button } from "@mui/material";
+import { saveBlinkUserGameData } from "../../../storage/storageManager";
 
 const QuizBlink = () => {
-
+  const time = useRef(0);
   const [gameIndex, setGameIndex] = useState(0);
   const [gameData, setGameData] = useState(null);
   const [clickPositionList, setClickPositionList] = useState([]);
@@ -48,8 +49,13 @@ const QuizBlink = () => {
   }
 
   useEffect(() => {
+    if (clickPositionList.length === 1) {
+      time.current = new Date().getTime();
+    }
+
     if (gameData && gameData[gameIndex]) {
       if (clickPositionList.length >= gameData[gameIndex].correct.length) {
+        const duringTime = new Date().getTime() - time.current;
         for (let i = 0; i < clickPositionList.length; i++) {
           if (clickPositionList[i] !== gameData[gameIndex].correct[i]) {
             alert("틀렸습니다!");
@@ -59,14 +65,15 @@ const QuizBlink = () => {
         }
 
         if (gameIndex === gameData.length - 1) {
+          saveBlinkUserGameData(gameLevel, duringTime);
           alert("축하합니다! 모든 게임을 완료했습니다.");
           setGameIndex(0);
           setClickPositionList([]);
         } else {
+          saveBlinkUserGameData(gameLevel, duringTime);
           setClickPositionList([]);
           setGameIndex(gameIndex + 1);
         }
-
       }
     }
 

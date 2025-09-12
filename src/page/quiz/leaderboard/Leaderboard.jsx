@@ -8,6 +8,7 @@ import {
   Typography,
 } from '@mui/material';
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
+import { loadUserProfile } from '../../../storage/profileManager';
 
 const medalColor = {
   1: '#ffd700', // gold
@@ -110,6 +111,7 @@ const Row = ({ rank, dateLabel, score, highlight = false }) => (
 );
 
 const Leaderboard = () => {
+  const userProfile = loadUserProfile();
   // 데모용 더미 데이터 (날짜/점수)
   const podium = [
     { rank: 2, dateLabel: '2025-08-31 (일)', score: 1200 },
@@ -132,7 +134,7 @@ const Leaderboard = () => {
       <Container sx={{ pb: 8 }}>
         <Box sx={{ display: 'flex', justifyContent: 'center' }}>
           <Typography variant="h5" fontWeight={800}>
-            홍길동, 72세 성적표
+            {`${userProfile.name}, ${userProfile.age}세 성적표`}
           </Typography>
         </Box>
 

@@ -15,6 +15,7 @@ import StyleIcon from '@mui/icons-material/Style';
 // 홈 상단 이미지
 import topImgHomeMain from '../../assets/img/top-img-home-main.png';
 import {useNavigate} from 'react-router-dom'
+import { loadUserProfile } from '../../storage/profileManager';
 
 /**
  * TODO:
@@ -25,6 +26,7 @@ import {useNavigate} from 'react-router-dom'
  * @constructor
  */
 const QuizHome = () => {
+  const userProfile = loadUserProfile();
   const navigate = useNavigate();
 
   const bgUrl = topImgHomeMain;
@@ -39,7 +41,7 @@ const QuizHome = () => {
         variant="h6"
         sx={{ flex: 1, textAlign: 'center', fontWeight: 700, color: 'text.primary' }}
       >
-        홍길동, 72세
+        {`${userProfile.name}, ${userProfile.age}세`}
       </Typography>
       <Container sx={{ py: 2, flex: 1 }}>
         <GoalCard title="오늘의 목표" percent={75} bgUrl={bgUrl} />

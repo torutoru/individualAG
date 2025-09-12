@@ -5,13 +5,16 @@
  * @returns {JSX.Element}
  * @constructor
  */
-import React, { useState } from 'react';
+import ArrowBackIosNewRoundedIcon from '@mui/icons-material/ArrowBackIosNewRounded';
+import EditRoundedIcon from '@mui/icons-material/EditRounded';
 import {
   AppBar,
   Avatar,
   Box,
   Button,
   Container,
+  Divider,
+  FormControlLabel,
   IconButton,
   Paper,
   Stack,
@@ -19,21 +22,17 @@ import {
   TextField,
   Toolbar,
   Typography,
-  FormControlLabel,
-  Divider,
 } from '@mui/material';
-import ArrowBackIosNewRoundedIcon from '@mui/icons-material/ArrowBackIosNewRounded';
-import EditRoundedIcon from '@mui/icons-material/EditRounded';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import imgDefaultProfile from '../../assets/img/profile-img-default.png';
-
+import { loadUserProfile, saveUserProfile } from '../../storage/profileManager';
 
 const Profile = () => {
   const navigate = useNavigate();
-
-  // 로컬 상태 (실제 저장은 TODO에 맞춰 API/스토어 연동 예정)
-  const [name, setName] = useState('홍길동');
-  const [age, setAge] = useState(72);
+  const userProfile = loadUserProfile();
+  const [name, setName] = useState(userProfile.name);
+  const [age, setAge] = useState(userProfile.age);
   const [notifications, setNotifications] = useState(true);
   const [sound, setSound] = useState(false);
   const [avatarUrl, setAvatarUrl] = useState(imgDefaultProfile);
@@ -54,6 +53,8 @@ const Profile = () => {
     // UX: 가벼운 피드백
     // 스낵바/토스트가 있다면 연결해도 좋습니다.
     alert('변경 사항이 저장되었습니다.'); // 필요 시 MUI Snackbar로 교체
+
+    saveUserProfile(age, name);
   };
 
   return (
