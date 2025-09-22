@@ -12,6 +12,10 @@ import Leaderboard from './page/quiz/leaderboard/Leaderboard'
 import Settings from './page/Settings/Settings'
 import Stats from './page/quiz/stats/Stats'
 import RpsInhibitionGame from './page/quiz/games/RpsInhibitionGame/RpsInhibitionGame'
+import TrafficLightReaction from './page/quiz/games/TrafficLightReaction/TrafficLightReaction'
+import StopwatchSense from './page/quiz/games/StopwatchSense/StopwatchSense'
+import ClockHandMatch from './page/quiz/games/ClockHandMatch/ClockHandMatch'
+import EmojiMatch from './page/quiz/games/EmojiMatch/EmojiMatch'
 
 
 function App() {
@@ -24,9 +28,16 @@ function App() {
           <Route path="/quiz-home" element={<QuizHome />} />
         </Route>
         <Route path="/quiz" element={<QuizLayout />}>
+          {/* Game SL */}
           <Route path="blink" element={<QuizBlink />} />
           <Route path="blink-v2" element={<QuizBlink_V2 />} />
           <Route path="rps-reverse" element={<RpsInhibitionGame />} />
+          <Route path="rps" element={<RpsInhibitionGame />} />
+          <Route path="traffic" element={<TrafficLightReaction />} />
+          <Route path="stopwatch" element={<StopwatchSense />} />
+          <Route path="clock" element={<ClockHandMatch />} />
+          <Route path="emoji" element={<EmojiMatch />} />
+          {/* Game EL */}
           <Route path="recognition" element={<QuizRecognition />} />
           <Route path="leader-board" element={<Leaderboard />} />
           <Route path="stats" element={<Stats />} />

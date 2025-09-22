@@ -19,48 +19,75 @@ const LABEL = { rock: "바위", paper: "보", scissors: "가위" };  // 버튼 �
 const SESSION_MS = 1 * 60 * 1000;      // 전체 세션 길이(1분)
 const FAST_BONUS_MS = 800;             // 빠른 반응 보너스 임계(≤800ms면 +1)
 const FEEDBACK_MS = 650;               // 정답/오답/시간초과 메시지 표시 시간
-const RPS_INTERVAL_MS = 4_000;         // 라운드 기본 시간(시작값)
-const MIN_INTERVAL_MS = 2_000;         // 적응 난이도 하한
-const MAX_INTERVAL_MS = RPS_INTERVAL_MS; // 적응 난이도 상한
+
+// 라운드 시간(시작값)
+const RPS_INTERVAL_MS = 2_500;
+// 적응 난이도 하·상한 (2.0s ~ 2.5s)
+const MIN_INTERVAL_MS = 2_000;
+const MAX_INTERVAL_MS = RPS_INTERVAL_MS;
+
+/** -------------------------------------------
+ * 유틸: 보안난수 기반 정수 [min,max], 연속 길이 범위 계산
+ * ------------------------------------------- */
+function randomInt(min, max) {
+  const range = max - min + 1;
+  if (window.crypto && window.crypto.getRandomValues) {
+    const arr = new Uint32Array(1);
+    window.crypto.getRandomValues(arr);
+    return min + (arr[0] % range);
+  }
+  return min + Math.floor(Math.random() * range);
+}
+
+// switchWindow(평균 연속 길이 느낌)를 받아 대략적인 하·상한 범위를 만든다
+function runBoundsFrom(windowLike) {
+  const mean = Math.max(2, Math.round(windowLike)); // 최소 2 보장
+  const minRun = Math.max(2, mean - 2);
+  const maxRun = Math.max(minRun + 1, mean + 2);
+  return { minRun, maxRun };
+}
 
 /** -------------------------------------------
  * 메인 컴포넌트
  * ------------------------------------------- */
 const RpsInhibitionGame = () => {
   /** 세션 상태 */
-  const [running, setRunning] = useState(false);              // 세션 진행 여부
+  const [running, setRunning] = useState(false);                  // 세션 진행 여부
   const [sessionLeftMs, setSessionLeftMs] = useState(SESSION_MS); // 세션 남은 시간(ms)
 
   /** 현재 라운드 규칙/자극 */
-  const [rule, setRule] = useState("WIN");                    // "WIN"(이기기) | "LOSE"(지기기)
-  const [stimulus, setStimulus] = useState("rock");           // 현재 제시된 손동작
+  const [rule, setRule] = useState("WIN");                        // "WIN"(이기기) | "LOSE"(지기기)
+  const [stimulus, setStimulus] = useState("rock");               // 현재 제시된 손동작
 
   /** 점수/통계 */
-  const [score, setScore] = useState(0);                      // 총 점수(정답 +1, 빠르면 +1 추가)
-  const [trials, setTrials] = useState(0);                    // 시도 수
-  const [corrects, setCorrects] = useState(0);                // 정답 수
-  const [avgRtMs, setAvgRtMs] = useState(null);               // 평균 반응시간(ms)
-  const [lastFeedback, setLastFeedback] = useState(null);     // "correct" | "correct-fast" | "wrong" | "timeout" | null
+  const [score, setScore] = useState(0);                          // 총 점수(정답 +1, 빠르면 +1 추가)
+  const [trials, setTrials] = useState(0);                        // 시도 수
+  const [corrects, setCorrects] = useState(0);                    // 정답 수
+  const [avgRtMs, setAvgRtMs] = useState(null);                   // 평균 반응시간(ms)
+  const [lastFeedback, setLastFeedback] = useState(null);         // "correct" | "correct-fast" | "wrong" | "timeout" | null
 
   /** 난이도(적응) */
-  const [intervalMs, setIntervalMs] = useState(MAX_INTERVAL_MS); // 라운드 시간(적응)
-  const [switchWindow, setSwitchWindow] = useState(5);        // 규칙 전환 주기(작을수록 전환 잦음)
-  const [showPreviewHint, setShowPreviewHint] = useState(true);// 초반 힌트 노출
+  const [intervalMs, setIntervalMs] = useState(MAX_INTERVAL_MS);  // 라운드 시간(적응)
+  const [switchWindow, setSwitchWindow] = useState(5);            // 규칙 평균 연속 길이 느낌(작을수록 잦은 전환)
+  const [showPreviewHint, setShowPreviewHint] = useState(true);   // 초반 힌트 노출
 
   /** 라운드 타이밍/토큰 (경쟁 상태 방지용) */
-  const stimulusShownAt = useRef(0);                          // 자극 제시 시각(performance.now)
-  const deadlineAt = useRef(0);                               // 라운드 마감 시각(= 제시+intervalMs)
-  const reactedThisRound = useRef(false);                     // 이번 라운드에서 입력했는지
-  const roundTokenRef = useRef(0);                            // 라운드 고유 토큰(이전 타이머 무시 용도)
+  const stimulusShownAt = useRef(0);                              // 자극 제시 시각(performance.now)
+  const deadlineAt = useRef(0);                                   // 라운드 마감 시각(= 제시+intervalMs)
+  const reactedThisRound = useRef(false);                         // 이번 라운드에서 입력했는지
+  const roundTokenRef = useRef(0);                                // 라운드 고유 토큰(이전 타이머 무시 용도)
+
+  /** 규칙 연속 길이 관리 (run-length 방식) */
+  const ruleRunLeftRef = useRef(0);                               // 현재 규칙에서 남은 라운드 수
 
   /** 카운트다운 표시용(rAF) */
-  const [roundLeftMs, setRoundLeftMs] = useState(0);          // 라운드 남은 시간(ms)
-  const countdownRaf = useRef(null);                          // rAF 핸들
+  const [roundLeftMs, setRoundLeftMs] = useState(0);              // 라운드 남은 시간(ms)
+  const countdownRaf = useRef(null);                              // rAF 핸들
 
   /** 타이머 핸들(정리용) */
-  const ticker = useRef(null);                                // 세션 남은시간 업데이트 interval
-  const roundTimer = useRef(null);                            // 라운드 타임아웃(미응답)
-  const feedbackTimer = useRef(null);                         // 피드백 표시 유지 타이머
+  const ticker = useRef(null);                                    // 세션 남은시간 업데이트 interval
+  const roundTimer = useRef(null);                                // 라운드 타임아웃(미응답)
+  const feedbackTimer = useRef(null);                             // 피드백 표시 유지 타이머
 
   /** 짧은 햅틱 */
   const vibrate = (ms = 30) => { try { if (navigator.vibrate) navigator.vibrate(ms); } catch {} };
@@ -115,9 +142,27 @@ const RpsInhibitionGame = () => {
   const nextRound = (opts) => {
     const keepRule = opts && opts.keepRule;
 
-    // 규칙 전환 확률(대략 switchWindow번마다 한 번 전환되는 느낌)
-    const shouldSwitch = keepRule ? false : Math.random() < 1 / Math.max(2, switchWindow);
-    setRule((prev) => (shouldSwitch ? (prev === "WIN" ? "LOSE" : "WIN") : prev));
+    // ★★★ 규칙 전환: 연속 길이(run-length) 기반 ★★★
+    setRule((prevRule) => {
+      if (keepRule) return prevRule;
+
+      // 현재 규칙에서 남은 라운드 수를 1 줄임
+      ruleRunLeftRef.current = Math.max(0, ruleRunLeftRef.current - 1);
+
+      if (ruleRunLeftRef.current > 0) {
+        // 아직 연속 구간 소진 전 → 규칙 유지
+        return prevRule;
+      } else {
+        // 연속 구간 소진 → 규칙 전환
+        const nextRule = prevRule === "WIN" ? "LOSE" : "WIN";
+
+        // 새 연속 길이 설정(현 switchWindow를 평균처럼 반영)
+        const { minRun, maxRun } = runBoundsFrom(switchWindow);
+        ruleRunLeftRef.current = randomInt(minRun, maxRun);
+
+        return nextRule;
+      }
+    });
 
     // 새 자극 선택
     const nextStim = HANDS[Math.floor(Math.random() * HANDS.length)];
@@ -194,6 +239,10 @@ const RpsInhibitionGame = () => {
     setRoundLeftMs(0);
     roundTokenRef.current = 0;
 
+    // ★ 규칙 연속 길이 초기화
+    const { minRun, maxRun } = runBoundsFrom(5);              // 초기 switchWindow(=5) 기준
+    ruleRunLeftRef.current = randomInt(minRun, maxRun);
+
     // 세션 타이머 시작
     const startAt = performance.now();
     ticker.current = setInterval(() => {
@@ -204,7 +253,7 @@ const RpsInhibitionGame = () => {
     }, 100);
 
     // 첫 라운드 시작
-    nextRound({ keepRule: true });
+    nextRound({ keepRule: true }); // 첫 라운드는 규칙 유지(연속 길이 소모 안 함)
   };
 
   /** 세션 종료/일시정지 */
@@ -288,7 +337,7 @@ const RpsInhibitionGame = () => {
         {/* 헤더 */}
         <Stack direction="row" alignItems="center" justifyContent="space-between" mb={1}>
           <Typography variant="h6" fontWeight={700}>역가위바위보 (반응 억제)</Typography>
-          <Typography variant="body2" sx={{ opacity: 0.7 }}>게임 시간: 1분</Typography>
+          <Typography variant="body2" sx={{ opacity: 0.7 }}>세션: 1분</Typography>
         </Stack>
 
         {/* 세션 진행도 */}
@@ -405,7 +454,7 @@ const RpsInhibitionGame = () => {
         {/* 디버그(난이도 상태) */}
         <Stack direction="row" spacing={2} justifyContent="center" mt={1.5}>
           <Typography variant="caption" sx={{ opacity: 0.7 }}>자극 간격: {intervalMs}ms</Typography>
-          <Typography variant="caption" sx={{ opacity: 0.7 }}>전환 주기: ~{switchWindow}회</Typography>
+          <Typography variant="caption" sx={{ opacity: 0.7 }}>전환 주기(평균): ~{switchWindow}회</Typography>
           {!showPreviewHint && <Typography variant="caption" sx={{ opacity: 0.7 }}>힌트: 해제됨</Typography>}
         </Stack>
       </CardContent>

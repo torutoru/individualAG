@@ -70,10 +70,48 @@ const QuizHome = () => {
           <GameListItem
             icon={<SportsKabaddiIcon />}
             title="역가위바위보"
+            subtitle="주의력, 처리속도, 시공간"
+            onClick={() => handleClick('/quiz/rps-reverse')}
+            score={92}
+          />
+          <GameListItem
+            icon={<SportsKabaddiIcon />}
+            title="신호등 반응 훈련"
+            subtitle="처리속도, 주의력"
+            onClick={() => handleClick('/quiz/traffic')}
+            score={92}
+          />
+          <GameListItem
+            icon={<SportsKabaddiIcon />}
+            title="스톱워치 감각"
+            subtitle="시공간, 기억력"
+            onClick={() => handleClick('/quiz/stopwatch')}
+            score={92}
+          />
+          <GameListItem
+            icon={<SportsKabaddiIcon />}
+            title="시계 바늘 맞추기"
+            subtitle="인지 영역"
+            onClick={() => handleClick('/quiz/clock')}
+            score={92}
+          />
+          <GameListItem
+            icon={<SportsKabaddiIcon />}
+            title="이모티콘 짝 맞추기"
+            subtitle="기억력, 정서 및 사회성, 주의력"
+            onClick={() => handleClick('/quiz/emoji')}
+            score={92}
+          />
+          <GameListItem
+            icon={<SportsKabaddiIcon />}
+            title="역가위바위보"
             subtitle="인지 영역"
             onClick={() => handleClick('/quiz/rps-reverse')}
             score={92}
           />
+
+
+          {/* Temp List */}
           <GameListItem
             icon={<StyleIcon />}
             title="카드 페어 매칭"
