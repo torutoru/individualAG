@@ -11,6 +11,10 @@ import TranslateIcon from '@mui/icons-material/Translate';
 import ExtensionIcon from '@mui/icons-material/Extension';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import StyleIcon from '@mui/icons-material/Style';
+import TrafficIcon from '@mui/icons-material/Traffic';           // 신호등 반응 훈련
+import AvTimerIcon from '@mui/icons-material/AvTimer';           // 스톱워치 감각
+import AccessTimeIcon from '@mui/icons-material/AccessTime';     // 시계 바늘 맞추기
+import EmojiEmotionsIcon from '@mui/icons-material/EmojiEmotions'; // 이모티콘 짝 맞추기
 
 // 홈 상단 이미지
 import topImgHomeMain from '../../assets/img/top-img-home-main.png';
@@ -75,41 +79,33 @@ const QuizHome = () => {
             score={92}
           />
           <GameListItem
-            icon={<SportsKabaddiIcon />}
+            icon={<TrafficIcon />}
             title="신호등 반응 훈련"
             subtitle="처리속도, 주의력"
             onClick={() => handleClick('/quiz/traffic')}
             score={92}
           />
           <GameListItem
-            icon={<SportsKabaddiIcon />}
+            icon={<AvTimerIcon />}
             title="스톱워치 감각"
             subtitle="시공간, 기억력"
             onClick={() => handleClick('/quiz/stopwatch')}
             score={92}
           />
           <GameListItem
-            icon={<SportsKabaddiIcon />}
+            icon={<AccessTimeIcon />}
             title="시계 바늘 맞추기"
             subtitle="인지 영역"
             onClick={() => handleClick('/quiz/clock')}
             score={92}
           />
           <GameListItem
-            icon={<SportsKabaddiIcon />}
+            icon={<EmojiEmotionsIcon />}
             title="이모티콘 짝 맞추기"
             subtitle="기억력, 정서 및 사회성, 주의력"
             onClick={() => handleClick('/quiz/emoji')}
             score={92}
           />
-          <GameListItem
-            icon={<SportsKabaddiIcon />}
-            title="역가위바위보"
-            subtitle="인지 영역"
-            onClick={() => handleClick('/quiz/rps-reverse')}
-            score={92}
-          />
-
 
           {/* Temp List */}
           <GameListItem
