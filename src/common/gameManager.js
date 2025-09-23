@@ -28,6 +28,8 @@ const GameData = {
     R_P_C: {
         gameLink: '/quiz/rps-reverse',
         discription: 'rock-papper-scissors',
+        skillTypes: [SkillTypes.MEMORY, SkillTypes.ATTENTION],
+        discription: '이 게임은 n * n 크기의 격자판에서 특정 위치가 깜빡이는 것을 기억하는 게임입니다. 사용자는 깜빡이는 위치를 순서대로 클릭해야 합니다. 게임의 난이도는 격자판이 깜빡이는 시간, 외워서 클릭해야 하는 위치의 개수, 총 2가지에 따라 결정됩니다.',
     },
     HUMAN_IMAGE: {
         gameLink: '/quiz/recognition',

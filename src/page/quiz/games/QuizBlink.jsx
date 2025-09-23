@@ -2,6 +2,7 @@ import { Button } from "@mui/material";
 import { useEffect, useRef, useState } from "react";
 import { makeBlinkQuizData } from "../../../ai/gameAI";
 import { GameData } from "../../../common/gameManager";
+import { GameData, GameDiscriptions } from "../../../common/gameManager";
 import { saveBlinkUserGameData } from "../../../storage/storageManager";
 import { getSkillTypeName } from "../../../common/cognitiveSkillsManager";
 

@@ -4,6 +4,7 @@ import FileChooser from './recognition/FileChooser';
 import ImageAnalysis from './recognition/ImageAnalysis';
 import ImageQuiz from './recognition/ImageQuiz';
 import { getSkillTypeName } from '../../../common/cognitiveSkillsManager';
+import { GameData } from '../../../common/gameManager';
 
 const QuizRecognition = () => {
     const [step, setStep] = useState(0);

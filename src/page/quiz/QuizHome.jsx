@@ -169,8 +169,10 @@ const QuizHome = () => {
             title="단어 맞추기"
             subtitle={GameData.BLANK_WORD.skillTypes.map((type) => getSkillTypeName(type)).join(', ')}
             onClick={() => handleClick(GameData.BLANK_WORD.gameLink)}
+            subtitle="기억력"
+            onClick={() => handleClick(GameData.BLINK_WORDLE.gameLink)}
             score={0}
-          />          
+          />
         </Stack>
       </Container>
     </Box>
