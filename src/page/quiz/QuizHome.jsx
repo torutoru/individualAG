@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Container, Stack, Typography } from '@mui/material';
+import { Box, Chip, Container, Divider, Stack, Typography } from '@mui/material';
 import GoalCard from '../../components/GoalCard/GoalCard';
 import GameListItem from '../../components/GameListItem/GameListItem';
 import SearchIcon from '@mui/icons-material/Search';
@@ -10,6 +10,7 @@ import PanoramaIcon from '@mui/icons-material/Panorama';
 import TranslateIcon from '@mui/icons-material/Translate';
 import ExtensionIcon from '@mui/icons-material/Extension';
 import DashboardIcon from '@mui/icons-material/Dashboard';
+import Spellcheck from '@mui/icons-material/Spellcheck';
 import StyleIcon from '@mui/icons-material/Style';
 import TrafficIcon from '@mui/icons-material/Traffic';           // 신호등 반응 훈련
 import AvTimerIcon from '@mui/icons-material/AvTimer';           // 스톱워치 감각
@@ -20,6 +21,8 @@ import EmojiEmotionsIcon from '@mui/icons-material/EmojiEmotions'; // 이모티�
 import topImgHomeMain from '../../assets/img/top-img-home-main.png';
 import {useNavigate} from 'react-router-dom'
 import { loadUserProfile } from '../../storage/profileManager';
+import { getSkillTypeName, SkillTypes } from '../../common/cognitiveSkillsManager';
+import { GameData } from '../../common/gameManager';
 
 /**
  * TODO:
@@ -143,6 +146,30 @@ const QuizHome = () => {
             onClick={() => handleClick('/quiz/puzzle')}
             score={65}
           />
+          <Divider textAlign='center' sx={{ borderColor: 'black' }}>
+            <Chip label="철우" />
+          </Divider>
+          <GameListItem
+            icon={<FaceRetouchingNaturalIcon />}
+            title="얼굴 인식"
+            subtitle={GameData.HUMAN_IMAGE.skillTypes.map((type) => getSkillTypeName(type)).join(', ')}
+            onClick={() => handleClick(GameData.HUMAN_IMAGE.gameLink)}
+            score={0}
+          />
+          <GameListItem
+            icon={<Spellcheck />}
+            title="워들 퍼즐"
+            subtitle="기억력"
+            onClick={() => handleClick(GameData.BLINK_WORDLE.gameLink)}
+            score={0}
+          />
+          <GameListItem
+            icon={<FaceRetouchingNaturalIcon />}
+            title="얼굴 인식"
+            subtitle="기억력"
+            onClick={() => handleClick('/quiz/recognition')}
+            score={0}
+          />          
         </Stack>
       </Container>
     </Box>

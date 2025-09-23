@@ -1,6 +1,7 @@
+import { Button } from "@mui/material";
 import { useEffect, useRef, useState } from "react";
 import { makeBlinkQuizData } from "../../../ai/gameAI";
-import { Button } from "@mui/material";
+import { GameData, GameDiscriptions } from "../../../common/gameManager";
 import { saveBlinkUserGameData } from "../../../storage/storageManager";
 
 const QuizBlink = () => {
@@ -93,6 +94,8 @@ const QuizBlink = () => {
 
   return (
     <div>
+      <h1>게임 설명</h1>
+      <h2>{GameData.BLINK.discription}</h2>
       <h1>Quiz Blink</h1>
       <div>
         <label>게임 레벨: </label>

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import FileChooser from './recognition/FileChooser';
 import ImageAnalysis from './recognition/ImageAnalysis';
 import ImageQuiz from './recognition/ImageQuiz';
+import { GameData, GameDiscriptions } from '../../../common/gameManager';
 
 const QuizRecognition = () => {
     const [step, setStep] = useState(0);
@@ -37,6 +38,7 @@ const QuizRecognition = () => {
     return (
         <>
             <h1>얼굴인식 퀴즈</h1>
+            <h2>{GameData.HUMAN_IMAGE.discription}</h2>
             {getRenderComponent()}
         </>
     )
