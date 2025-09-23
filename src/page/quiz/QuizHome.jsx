@@ -1,29 +1,28 @@
-import React from 'react';
-import { Box, Chip, Container, Divider, Stack, Typography } from '@mui/material';
-import GoalCard from '../../components/GoalCard/GoalCard';
-import GameListItem from '../../components/GameListItem/GameListItem';
 import SearchIcon from '@mui/icons-material/Search';
+import { Box, Chip, Container, Divider, Stack, Typography } from '@mui/material';
+import GameListItem from '../../components/GameListItem/GameListItem';
+import GoalCard from '../../components/GoalCard/GoalCard';
 // import PsychologyIcon from '@mui/icons-material/Psychology';
-import SportsKabaddiIcon from '@mui/icons-material/SportsKabaddi';
-import FaceRetouchingNaturalIcon from '@mui/icons-material/FaceRetouchingNatural';
-import PanoramaIcon from '@mui/icons-material/Panorama';
-import TranslateIcon from '@mui/icons-material/Translate';
-import ExtensionIcon from '@mui/icons-material/Extension';
+import AccessTimeIcon from '@mui/icons-material/AccessTime'; // 시계 바늘 맞추기
+import AvTimerIcon from '@mui/icons-material/AvTimer'; // 스톱워치 감각
 import DashboardIcon from '@mui/icons-material/Dashboard';
-import Spellcheck from '@mui/icons-material/Spellcheck';
-import StyleIcon from '@mui/icons-material/Style';
-import TrafficIcon from '@mui/icons-material/Traffic';           // 신호등 반응 훈련
-import AvTimerIcon from '@mui/icons-material/AvTimer';           // 스톱워치 감각
-import AccessTimeIcon from '@mui/icons-material/AccessTime';     // 시계 바늘 맞추기
 import EmojiEmotionsIcon from '@mui/icons-material/EmojiEmotions'; // 이모티콘 짝 맞추기
+import ExtensionIcon from '@mui/icons-material/Extension';
+import FaceRetouchingNaturalIcon from '@mui/icons-material/FaceRetouchingNatural';
 import Fontdownload from '@mui/icons-material/FontDownload'; // 워들 퍼즐
+import PanoramaIcon from '@mui/icons-material/Panorama';
+import Spellcheck from '@mui/icons-material/Spellcheck';
+import SportsKabaddiIcon from '@mui/icons-material/SportsKabaddi';
+import StyleIcon from '@mui/icons-material/Style';
+import TrafficIcon from '@mui/icons-material/Traffic'; // 신호등 반응 훈련
+import TranslateIcon from '@mui/icons-material/Translate';
 
 // 홈 상단 이미지
+import { useNavigate } from 'react-router-dom';
 import topImgHomeMain from '../../assets/img/top-img-home-main.png';
-import {useNavigate} from 'react-router-dom'
-import { loadUserProfile } from '../../storage/profileManager';
-import { getSkillTypeName, SkillTypes } from '../../common/cognitiveSkillsManager';
+import { getSkillTypeName } from '../../common/cognitiveSkillsManager';
 import { GameData } from '../../common/gameManager';
+import { loadUserProfile } from '../../storage/profileManager';
 
 /**
  * TODO:
@@ -169,8 +168,6 @@ const QuizHome = () => {
             title="단어 맞추기"
             subtitle={GameData.BLANK_WORD.skillTypes.map((type) => getSkillTypeName(type)).join(', ')}
             onClick={() => handleClick(GameData.BLANK_WORD.gameLink)}
-            subtitle="기억력"
-            onClick={() => handleClick(GameData.BLINK_WORDLE.gameLink)}
             score={0}
           />
         </Stack>

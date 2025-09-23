@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { GameData } from '../../../common/gameManager';
 import FileChooser from './recognition/FileChooser';
 import ImageAnalysis from './recognition/ImageAnalysis';
 import ImageQuiz from './recognition/ImageQuiz';
