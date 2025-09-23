@@ -108,7 +108,7 @@ const QuizHome = () => {
             icon={<StyleIcon />}
             title="카드 페어 매칭"
             subtitle="기억력"
-            onClick={() => handleClick('/quiz/rock-paper')}
+            onClick={() => handleClick('/quiz/card-pair')}
             score={32}
           />
           <GameListItem

@@ -16,6 +16,7 @@ import TrafficLightReaction from './page/quiz/games/TrafficLightReaction/Traffic
 import StopwatchSense from './page/quiz/games/StopwatchSense/StopwatchSense'
 import ClockHandMatch from './page/quiz/games/ClockHandMatch/ClockHandMatch'
 import EmojiMatch from './page/quiz/games/EmojiMatch/EmojiMatch'
+import CardPairMatch from './page/quiz/games/CardPairMatch/CardPairMatch'
 import QuizBlankWord from './page/quiz/games/blank_word/QuizBlankWord';
 import QuizBlankWordle from './page/quiz/games/blank_wordle/QuizBlankWordle';
 
@@ -40,6 +41,7 @@ function App() {
           <Route path="stopwatch" element={<StopwatchSense />} />
           <Route path="clock" element={<ClockHandMatch />} />
           <Route path="emoji" element={<EmojiMatch />} />
+          <Route path="card-pair" element={<CardPairMatch />} />
           {/* Game EL */}
           <Route path="recognition" element={<QuizRecognition />} />
           <Route path="leader-board" element={<Leaderboard />} />
