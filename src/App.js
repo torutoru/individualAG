@@ -16,7 +16,8 @@ import TrafficLightReaction from './page/quiz/games/TrafficLightReaction/Traffic
 import StopwatchSense from './page/quiz/games/StopwatchSense/StopwatchSense'
 import ClockHandMatch from './page/quiz/games/ClockHandMatch/ClockHandMatch'
 import EmojiMatch from './page/quiz/games/EmojiMatch/EmojiMatch'
-
+import QuizBlankWord from './page/quiz/games/blank_word/QuizBlankWord';
+import QuizBlankWordle from './page/quiz/games/blank_wordle/QuizBlankWordle';
 
 function App() {
   return (
@@ -31,6 +32,8 @@ function App() {
           {/* Game SL */}
           <Route path="blink" element={<QuizBlink />} />
           <Route path="blink-v2" element={<QuizBlink_V2 />} />
+          <Route path="blank-word" element={<QuizBlankWord />} />
+          <Route path="blank-wordle" element={<QuizBlankWordle />} />
           <Route path="rps-reverse" element={<RpsInhibitionGame />} />
           <Route path="rps" element={<RpsInhibitionGame />} />
           <Route path="traffic" element={<TrafficLightReaction />} />

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Container, Stack, Typography } from '@mui/material';
+import { Box, Chip, Container, Divider, Stack, Typography } from '@mui/material';
 import GoalCard from '../../components/GoalCard/GoalCard';
 import GameListItem from '../../components/GameListItem/GameListItem';
 import SearchIcon from '@mui/icons-material/Search';
@@ -10,16 +10,20 @@ import PanoramaIcon from '@mui/icons-material/Panorama';
 import TranslateIcon from '@mui/icons-material/Translate';
 import ExtensionIcon from '@mui/icons-material/Extension';
 import DashboardIcon from '@mui/icons-material/Dashboard';
+import Spellcheck from '@mui/icons-material/Spellcheck';
 import StyleIcon from '@mui/icons-material/Style';
 import TrafficIcon from '@mui/icons-material/Traffic';           // 신호등 반응 훈련
 import AvTimerIcon from '@mui/icons-material/AvTimer';           // 스톱워치 감각
 import AccessTimeIcon from '@mui/icons-material/AccessTime';     // 시계 바늘 맞추기
 import EmojiEmotionsIcon from '@mui/icons-material/EmojiEmotions'; // 이모티콘 짝 맞추기
+import Fontdownload from '@mui/icons-material/FontDownload'; // 워들 퍼즐
 
 // 홈 상단 이미지
 import topImgHomeMain from '../../assets/img/top-img-home-main.png';
 import {useNavigate} from 'react-router-dom'
 import { loadUserProfile } from '../../storage/profileManager';
+import { getSkillTypeName, SkillTypes } from '../../common/cognitiveSkillsManager';
+import { GameData } from '../../common/gameManager';
 
 /**
  * TODO:
@@ -50,13 +54,6 @@ const QuizHome = () => {
       <Container sx={{ py: 2, flex: 1 }}>
         <GoalCard title="오늘의 목표" percent={75} bgUrl={bgUrl} />
         <Stack spacing={1.5} sx={{ mt: 2, pb: 8 }}>
-          <GameListItem
-            icon={<DashboardIcon />}
-            title="Blink 기억력 게임"
-            subtitle="기억력"
-            onClick={() => handleClick('/quiz/blink')}
-            score={23}
-          />
           <GameListItem
             icon={<DashboardIcon />}
             title="Blink 기억력 게임(V2)"
@@ -143,6 +140,37 @@ const QuizHome = () => {
             onClick={() => handleClick('/quiz/puzzle')}
             score={65}
           />
+          <Divider textAlign='center' sx={{ borderColor: 'black' }}>
+            <Chip label="철우" />
+          </Divider>
+          <GameListItem
+            icon={<DashboardIcon />}
+            title="Blink 기억력 게임"
+            subtitle={GameData.BLINK.skillTypes.map((type) => getSkillTypeName(type)).join(', ')}
+            onClick={() => handleClick(GameData.BLINK.gameLink)}
+            score={0}
+          />
+          <GameListItem
+            icon={<FaceRetouchingNaturalIcon />}
+            title="얼굴 인식"
+            subtitle={GameData.HUMAN_IMAGE.skillTypes.map((type) => getSkillTypeName(type)).join(', ')}
+            onClick={() => handleClick(GameData.HUMAN_IMAGE.gameLink)}
+            score={0}
+          />
+          <GameListItem
+            icon={<Spellcheck />}
+            title="워들 퍼즐"
+            subtitle={GameData.BLANK_WORDLE.skillTypes.map((type) => getSkillTypeName(type)).join(', ')}
+            onClick={() => handleClick(GameData.BLANK_WORDLE.gameLink)}
+            score={0}
+          />
+          <GameListItem
+            icon={<Fontdownload />}
+            title="단어 맞추기"
+            subtitle={GameData.BLANK_WORD.skillTypes.map((type) => getSkillTypeName(type)).join(', ')}
+            onClick={() => handleClick(GameData.BLANK_WORD.gameLink)}
+            score={0}
+          />          
         </Stack>
       </Container>
     </Box>

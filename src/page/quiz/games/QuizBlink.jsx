@@ -1,7 +1,9 @@
+import { Button } from "@mui/material";
 import { useEffect, useRef, useState } from "react";
 import { makeBlinkQuizData } from "../../../ai/gameAI";
-import { Button } from "@mui/material";
+import { GameData } from "../../../common/gameManager";
 import { saveBlinkUserGameData } from "../../../storage/storageManager";
+import { getSkillTypeName } from "../../../common/cognitiveSkillsManager";
 
 const QuizBlink = () => {
   const time = useRef(0);
@@ -93,6 +95,10 @@ const QuizBlink = () => {
 
   return (
     <div>
+      <h1>게임 설명</h1>
+      <h2>{GameData.BLINK.discription}</h2>
+      <h3>Game Data: during_time(한게임 진행한 시간), level: 1부터 5까지 제공</h3>
+      <h3>Game Skill: {GameData.BLINK.skillTypes.map((type) => getSkillTypeName(type)).join(', ')}</h3>
       <h1>Quiz Blink</h1>
       <div>
         <label>게임 레벨: </label>
