@@ -5,6 +5,7 @@ import etc from './etc';
 const theme = createTheme({
   ...typography,
   ...etc,
+  
   palette: {
     highlight: {
       darkest: '#006FFD',
@@ -18,6 +19,21 @@ const theme = createTheme({
     },
   },
   components: {
+     MuiCssBaseline: {
+      styleOverrides: {
+        ':root': {
+          '--max-content-view-width': '1280px',
+          '--content-padding-small': '24px',
+          '--content-padding-large': '40px',
+          '--radius-small': '12px',
+          '--radius-medium': '20px',
+          '--radius-large': '30px',
+          '--icon-small': '20px',
+          '--icon-medium': '24px',
+          '--icon-large': '42px',
+        },
+      },
+    },
     MuiLink: {
     styleOverrides: {
       root: {

@@ -1,13 +1,14 @@
 import {  styled } from '@mui/material';
 
 export const MainContainer = styled('main')(({ theme }) => ({
-    display: 'flex', 
-    flexDirection: 'column',
-    maxWidth: '1200px',
+    maxWidth: 'var(--max-content-view-width)',
     margin: '0 auto',
-    padding: '24px',
+    padding: 'var(--content-padding-small)',
     [theme.breakpoints.up('sm')]: {
-     padding: '40px',
+     padding: 'var(--content-padding-large)',
+     h2: {
+      fontSize: '1.8rem'
+     }
     },
 }));
 

@@ -56,7 +56,6 @@ const QuizHome = () => {
         오늘은 어떤 인지 능력을 향상 시켜볼까요?
       </Typography>
       <GoalCard title="오늘의 목표" percent={75} goalImgUrl={goalImgUrl} />
-      {/* <Stack spacing={1.5} sx={{ mt: 2, pb: 8 }}> */}
       <List sx={{ my: 4 }}>
         <GameListItem
           icon={<DashboardIcon />}
@@ -175,7 +174,6 @@ const QuizHome = () => {
           onClick={() => handleClick(GameData.BLANK_WORD.gameLink)}
           score={0}
         />
-      {/* </Stack> */}
       </List>
     </>
   );

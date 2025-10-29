@@ -1,6 +1,6 @@
 import { createTheme } from '@mui/material';
 
-const defaultTypography = createTheme({
+const typography = createTheme({
   typography: {
     fontFamily: ['Pretendard', 'sans-serif'].join(','),
     fontWeightRegular: 400,
@@ -83,4 +83,4 @@ const defaultTypography = createTheme({
   },
 });
 
-export default { typography: defaultTypography.typography };
+export default typography;

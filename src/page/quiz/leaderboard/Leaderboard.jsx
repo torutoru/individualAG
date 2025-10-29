@@ -130,7 +130,7 @@ const Leaderboard = () => {
   ];
 
   return (
-    <Box sx={{ minHeight: '100dvh', bgcolor: 'background.default', display: 'flex', flexDirection: 'column' }}>
+    <Box sx={{ minHeight: '100dvh', bgcolor: 'background.default',  }}>
       <Container sx={{ pb: 8 }}>
         <Box sx={{ display: 'flex', justifyContent: 'center' }}>
           <Typography variant="h5" fontWeight={800}>

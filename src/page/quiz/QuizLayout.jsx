@@ -33,8 +33,7 @@ const QuizLayout = () => {
       sx={{
         minHeight: '100dvh',
         bgcolor: 'background.default',
-        display: 'flex',
-        flexDirection: 'column',
+
       }}
     >
       {/* 상단 헤더 */}
