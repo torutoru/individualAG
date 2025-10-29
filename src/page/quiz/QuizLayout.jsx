@@ -7,6 +7,7 @@ import {
 } from '@mui/material';
 import BottomBar from '../../components/BottomBar/BottomBar';
 import AppHeader from '../../components/AppHeader/AppHeader'
+import { MainContainer } from './styles';
 
 const QuizLayout = () => {
   const navigate = useNavigate();
@@ -40,9 +41,9 @@ const QuizLayout = () => {
       <AppHeader title={tab.toUpperCase()} onBack={() => window.history.back()}/>
 
       {/* 메인 컨텐츠 (AppBar와 BottomBar 사이 여백 확보) */}
-      <Container sx={{flex: 1, width: '100%', pt: 2, pb: 10}}>
+      <MainContainer>
         <Outlet/>
-      </Container>
+      </MainContainer>
 
       {/* 하단 바 */}
       <BottomBar value={tab} onChange={handleChangeBottomBar}/>

@@ -43,12 +43,17 @@ const QuizHome = () => {
   };
 
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+    <>
       <Typography
-        variant="h6"
-        sx={{ flex: 1, textAlign: 'center', fontWeight: 700, color: 'text.primary' }}
+        variant="h2"
+        align="lef"
       >
-        {`${userProfile.name}, ${userProfile.age}세`}
+        {`안녕하세요. ${userProfile.name}님`}
+      </Typography>
+      <Typography 
+        variant="body-large"
+        align="lef">
+        오늘은 어떤 인지 능력을 향상 시켜볼까요?
       </Typography>
       <Container sx={{ py: 2, flex: 1 }}>
         <GoalCard title="오늘의 목표" percent={75} bgUrl={bgUrl} />
@@ -172,7 +177,7 @@ const QuizHome = () => {
           />
         </Stack>
       </Container>
-    </Box>
+    </>
   );
 };
 

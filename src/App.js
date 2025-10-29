@@ -1,4 +1,5 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { ThemeProvider, CssBaseline } from '@mui/material';
 import Home from './page/home/Home';
 import NotFound from './page/NotFound';
 import QuizBlink from './page/quiz/games/QuizBlink';
@@ -6,7 +7,7 @@ import QuizBlink_V2 from './page/quiz/games/QuizBlink_V2';
 import QuizHome from './page/quiz/QuizHome';
 import QuizLayout from './page/quiz/QuizLayout';
 import QuizRecognition from './page/quiz/games/QuizRecognition';
-
+import theme from './theme';
 import Profile from './page/profile/Profile';
 import Leaderboard from './page/quiz/leaderboard/Leaderboard'
 import Settings from './page/Settings/Settings'
@@ -16,41 +17,45 @@ import TrafficLightReaction from './page/quiz/games/TrafficLightReaction/Traffic
 import StopwatchSense from './page/quiz/games/StopwatchSense/StopwatchSense'
 import ClockHandMatch from './page/quiz/games/ClockHandMatch/ClockHandMatch'
 import EmojiMatch from './page/quiz/games/EmojiMatch/EmojiMatch'
-import CardPairMatch from './page/quiz/games/CardPairMatch/CardPairMatch'
+// import CardPairMatch from './page/quiz/games/CardPairMatch/CardPairMatch'
 import QuizBlankWord from './page/quiz/games/blank_word/QuizBlankWord';
 import QuizBlankWordle from './page/quiz/games/blank_wordle/QuizBlankWordle';
 
+
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/" element={<QuizLayout />}>
-          <Route path="/quiz-home" element={<QuizHome />} />
-        </Route>
-        <Route path="/quiz" element={<QuizLayout />}>
-          {/* Game SL */}
-          <Route path="blink" element={<QuizBlink />} />
-          <Route path="blink-v2" element={<QuizBlink_V2 />} />
-          <Route path="blank-word" element={<QuizBlankWord />} />
-          <Route path="blank-wordle" element={<QuizBlankWordle />} />
-          <Route path="rps-reverse" element={<RpsInhibitionGame />} />
-          <Route path="rps" element={<RpsInhibitionGame />} />
-          <Route path="traffic" element={<TrafficLightReaction />} />
-          <Route path="stopwatch" element={<StopwatchSense />} />
-          <Route path="clock" element={<ClockHandMatch />} />
-          <Route path="emoji" element={<EmojiMatch />} />
-          <Route path="card-pair" element={<CardPairMatch />} />
-          {/* Game EL */}
-          <Route path="recognition" element={<QuizRecognition />} />
-          <Route path="leader-board" element={<Leaderboard />} />
-          <Route path="stats" element={<Stats />} />
-          <Route path="settings" element={<Settings />} />
-        </Route>
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-    </BrowserRouter>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/" element={<QuizLayout />}>
+            <Route path="/quiz-home" element={<QuizHome />} />
+          </Route>
+          <Route path="/quiz" element={<QuizLayout />}>
+            {/* Game SL */}
+            <Route path="blink" element={<QuizBlink />} />
+            <Route path="blink-v2" element={<QuizBlink_V2 />} />
+            <Route path="blank-word" element={<QuizBlankWord />} />
+            <Route path="blank-wordle" element={<QuizBlankWordle />} />
+            <Route path="rps-reverse" element={<RpsInhibitionGame />} />
+            <Route path="rps" element={<RpsInhibitionGame />} />
+            <Route path="traffic" element={<TrafficLightReaction />} />
+            <Route path="stopwatch" element={<StopwatchSense />} />
+            <Route path="clock" element={<ClockHandMatch />} />
+            <Route path="emoji" element={<EmojiMatch />} />
+            {/* <Route path="card-pair" element={<CardPairMatch />} /> */}
+            {/* Game EL */}
+            <Route path="recognition" element={<QuizRecognition />} />
+            <Route path="leader-board" element={<Leaderboard />} />
+            <Route path="stats" element={<Stats />} />
+            <Route path="settings" element={<Settings />} />
+          </Route>
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </BrowserRouter>
+    </ThemeProvider>
   );
 }
 

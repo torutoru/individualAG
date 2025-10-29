@@ -1,6 +1,10 @@
 import { createTheme } from '@mui/material/styles';
+import typography from './typography';
+import etc from './etc';
 
 const theme = createTheme({
+  ...typography,
+  ...etc,
   components: {
     MuiLink: {
     styleOverrides: {
