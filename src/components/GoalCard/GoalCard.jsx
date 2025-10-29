@@ -1,53 +1,35 @@
 import React from 'react';
-import { Box, Typography, Paper } from '@mui/material';
+import { Box, Typography, Stack } from '@mui/material';
 import ProgressBar from '../ProgressBar/ProgressBar';
+import { GoalCardContainer } from './styles';
 
 /**
  * 치매 게임 목표 정보
  *
  * @param title
  * @param percent
- * @param bgUrl
+ * @param goalImgUrl
  * @returns {JSX.Element}
  * @constructor
  */
-const GoalCard = ({ title = "Today's Goal", percent = 75, bgUrl }) => {
+const GoalCard = ({ title = "Today's Goal", percent = 75, goalImgUrl }) => {
   return (
-    <Paper
-      elevation={0}
-      sx={{
-        p: 0,
-        overflow: 'hidden',
-        borderRadius: 4,
-        minHeight: 220,
-        position: 'relative',
-        bgcolor: 'transparent',
-      }}
-    >
-      <Box
-        sx={{
-          position: 'absolute',
-          inset: 0,
-          backgroundImage: `linear-gradient(0deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0) 40%), url(${bgUrl})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          filter: 'saturate(1.1)',
-        }}
-      />
-      <Box sx={{ position: 'relative', p: 3 }}>
-        <Typography variant="h4" sx={{ color: '#fff', fontWeight: 800 }}>
+    <GoalCardContainer sx={{ mt: 2,}}>
+      <img src={goalImgUrl} alt="" />
+      <Stack flexDirection="row" justifyContent="space-between" alignItems="end" sx={{ mt: -6 }}>
+        <Typography variant="h1" align="left">
           {title}
         </Typography>
-        <Box sx={{ mt: 2, display: 'flex', alignItems: 'center', gap: 2 }}>
-          <Box sx={{ flex: 1 }}>
-            <ProgressBar value={percent} />
-          </Box>
-          <Typography variant="h6" sx={{ color: 'primary.main', fontWeight: 800 }}>
-            {percent}%
-          </Typography>
+        <Typography variant="h4" aligh="right" colo="highlight.dark">
+          {percent}%
+        </Typography>
+      </Stack>
+      <Box sx={{ mt: 2, display: 'flex' }}>
+        <Box sx={{ flex: 1 }}>
+          <ProgressBar value={percent} />
         </Box>
       </Box>
-    </Paper>
+    </GoalCardContainer>
   );
 };
 

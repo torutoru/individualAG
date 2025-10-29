@@ -5,6 +5,18 @@ import etc from './etc';
 const theme = createTheme({
   ...typography,
   ...etc,
+  palette: {
+    highlight: {
+      darkest: '#006FFD',
+      darker: '#2897FF',
+      medium: '#6FB9FF',
+      lightest: '#EAF2FF',
+    },
+    neutrallight: {
+      dark: '#D4D6DD',
+      medium: '#E8E9F1',
+    },
+  },
   components: {
     MuiLink: {
     styleOverrides: {
