@@ -29,6 +29,8 @@ const theme = createTheme(baseTheme, {
       styleOverrides: {
         ':root': {
           '--max-content-view-width': '1280px',
+          '--appbar-height': '56px',
+          '--bottom-navigation-height': '68px',
           '--content-padding-small': '24px',
           '--content-padding-large': '40px',
           '--radius-small': '12px',

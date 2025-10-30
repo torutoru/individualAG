@@ -5,12 +5,10 @@ import { Paper } from '@mui/material';
 export const BottomNavigationContainer = styled(Paper)(({ theme }) => ({
   position: 'sticky',
   bottom: 0,
-  
-
-  bgcolor: 'background.paper',
+  backgroundColor: theme.palette.background.paper,
   zIndex: '100',
   '.MuiBottomNavigation-root': {
-    height: '88px',
+    height: 'var(--bottom-navigation-height)',
     padding: '0 16px',
   },
   '.MuiBottomNavigationAction-label.Mui-selected': {

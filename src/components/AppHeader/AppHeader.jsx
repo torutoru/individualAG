@@ -1,8 +1,9 @@
 import React from 'react';
-import {AppBar, Toolbar, IconButton, Typography, Box} from '@mui/material';
+import {Toolbar, IconButton, Typography, Box} from '@mui/material';
 import ArrowBackIosNewRoundedIcon from '@mui/icons-material/ArrowBackIosNewRounded';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import {useNavigate} from 'react-router-dom'
+import {useNavigate} from 'react-router-dom';
+import { AppbarContainer } from './styles';
 
 const AppHeader = ({title = '', onBack}) => {
 
@@ -15,31 +16,23 @@ const AppHeader = ({title = '', onBack}) => {
   const isTest = true;
 
   return (
-    <AppBar position="sticky" elevation={0} sx={{bgcolor: 'background.default'}}>
+    <AppbarContainer position="sticky" elevation={0}>
       <Toolbar>
-{/*        <Box sx={{width: 48}}>
-          {onBack && (<IconButton onClick={onBack} sx={{color: 'text.primary'}}>
-            <ArrowBackIosNewRoundedIcon/>
-          </IconButton>)}
-        </Box>*/}
-        <Box sx={{width: 48}}>
-          {!isTest && onBack && (<IconButton onClick={onBack} sx={{color: 'text.primary'}}>
-            <ArrowBackIosNewRoundedIcon/>
-          </IconButton>)}
-        </Box>
+        {!isTest && onBack && (<IconButton onClick={onBack} edge="start" sx={{ position: 'absolute', left: 8 }} aria-label="뒤로가기">
+          <ArrowBackIosNewRoundedIcon/>
+        </IconButton>)}
         <Typography
-          variant="h1"
-          sx={{flex: 1, textAlign: 'center', fontWeight: 700, color: 'text.primary'}}
+          component="p"
+          fontWeight={600}
+          sx={{ flexGrow: 1, textAlign: 'center' }}
         >
           {title}
         </Typography>
-        <Box sx={{width: 48, display: 'flex', justifyContent: 'flex-end'}}>
-          <IconButton onClick={() => handleRightClick()}>
-            <AccountCircleIcon/>
-          </IconButton>
-        </Box>
+        <IconButton onClick={() => handleRightClick()} sx={{ position: 'absolute', right: 8 }} aria-label="프로필">
+          <AccountCircleIcon/>
+        </IconButton>
       </Toolbar>
-    </AppBar>);
+    </AppbarContainer>);
 };
 
 export default AppHeader;
