@@ -7,6 +7,9 @@ const baseTheme = createTheme({
   ...etc,
   
   palette: {
+    primary: {
+      main: '#006FFD',
+    },
     highlight: {
       darkest: '#006FFD',
       darker: '#2897FF',

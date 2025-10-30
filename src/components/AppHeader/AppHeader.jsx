@@ -1,7 +1,7 @@
 import React from 'react';
 import {AppBar, Toolbar, IconButton, Typography, Box} from '@mui/material';
 import ArrowBackIosNewRoundedIcon from '@mui/icons-material/ArrowBackIosNewRounded';
-import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import {useNavigate} from 'react-router-dom'
 
 const AppHeader = ({title = '', onBack}) => {
@@ -28,14 +28,14 @@ const AppHeader = ({title = '', onBack}) => {
           </IconButton>)}
         </Box>
         <Typography
-          variant="h6"
+          variant="h1"
           sx={{flex: 1, textAlign: 'center', fontWeight: 700, color: 'text.primary'}}
         >
           {title}
         </Typography>
         <Box sx={{width: 48, display: 'flex', justifyContent: 'flex-end'}}>
-          <IconButton onClick={() => handleRightClick()} sx={{color: 'text.primary'}}>
-            <PersonOutlineIcon/>
+          <IconButton onClick={() => handleRightClick()}>
+            <AccountCircleIcon/>
           </IconButton>
         </Box>
       </Toolbar>

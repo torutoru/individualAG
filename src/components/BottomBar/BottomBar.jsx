@@ -1,9 +1,10 @@
 import React from 'react';
-import { BottomNavigation, BottomNavigationAction, Paper } from '@mui/material';
+import { BottomNavigation, BottomNavigationAction } from '@mui/material';
+import HomeFilledIcon from '@mui/icons-material/HomeFilled';
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
-import QueryStatsIcon from '@mui/icons-material/QueryStats';
+import LeaderboardIcon from '@mui/icons-material/Leaderboard';
 import SettingsIcon from '@mui/icons-material/Settings';
-import HomeIcon from '@mui/icons-material/Home';
+import { BottomNavigationContainer } from './styles';
 
 /**
  * 하단 메뉴
@@ -17,16 +18,7 @@ const BottomBar = ({ value = 'home', onChange }) => {
 
 
   return (
-    <Paper
-      elevation={0}
-      sx={{
-        position: 'sticky',
-        bottom: 0,
-        borderTop: '1px solid',
-        borderColor: 'secondary.main',
-        bgcolor: 'background.paper',
-      }}
-    >
+    <BottomNavigationContainer elevation={0}>
       <BottomNavigation
         value={value}
         onChange={(_, v) => onChange(v)}
@@ -36,12 +28,12 @@ const BottomBar = ({ value = 'home', onChange }) => {
           '& .Mui-selected': { color: 'primary.main' },
         }}
       >
-        <BottomNavigationAction label="Home" value="home" icon={<HomeIcon />} />
-        <BottomNavigationAction label="Leaderboard" value="leaderboard" icon={<EmojiEventsIcon />} />
-        <BottomNavigationAction label="Stats" value="stats" icon={<QueryStatsIcon />} />
-        <BottomNavigationAction label="Settings" value="settings" icon={<SettingsIcon />} />
+        <BottomNavigationAction label="홈" value="Home" icon={<HomeFilledIcon />} />
+        <BottomNavigationAction label="리더보드" value="leaderboard" icon={<EmojiEventsIcon />} />
+        <BottomNavigationAction label="통계" value="stats" icon={<LeaderboardIcon />} />
+        <BottomNavigationAction label="설정" value="settings" icon={<SettingsIcon />} />
       </BottomNavigation>
-    </Paper>
+    </BottomNavigationContainer>
   );
 };
 
