@@ -2,7 +2,7 @@ import { createTheme } from '@mui/material/styles';
 import typography from './typography';
 import etc from './etc';
 
-const theme = createTheme({
+const baseTheme = createTheme({
   ...typography,
   ...etc,
   
@@ -18,8 +18,11 @@ const theme = createTheme({
       medium: '#E8E9F1',
     },
   },
+});
+
+const theme = createTheme(baseTheme, {
   components: {
-     MuiCssBaseline: {
+    MuiCssBaseline: {
       styleOverrides: {
         ':root': {
           '--max-content-view-width': '1280px',
@@ -32,13 +35,19 @@ const theme = createTheme({
           '--icon-medium': '24px',
           '--icon-large': '42px',
         },
+        html: {
+          fontSize: '16px',
+          [baseTheme.breakpoints.up('sm')]: {
+            fontSize: '20px',
+          },
+        },
       },
     },
     MuiLink: {
-    styleOverrides: {
-      root: {
-        textDecoration: 'none',
-        color: '#fff',
+      styleOverrides: {
+        root: {
+          textDecoration: 'none',
+          color: '#fff',
           '&:hover': {
             textDecoration: 'underline',
             color: 'inherit',

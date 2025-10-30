@@ -6,9 +6,6 @@ export const MainContainer = styled('main')(({ theme }) => ({
     padding: 'var(--content-padding-small)',
     [theme.breakpoints.up('sm')]: {
      padding: 'var(--content-padding-large)',
-     h2: {
-      fontSize: '1.8rem'
-     }
     },
 }));
 

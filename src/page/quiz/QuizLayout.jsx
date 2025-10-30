@@ -31,9 +31,9 @@ const QuizLayout = () => {
   return (
     <Box
       sx={{
+        minWidth: '375px',
         minHeight: '100dvh',
         bgcolor: 'background.default',
-
       }}
     >
       {/* 상단 헤더 */}
