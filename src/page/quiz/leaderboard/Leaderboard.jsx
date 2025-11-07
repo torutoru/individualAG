@@ -19,7 +19,6 @@ const medalColor = {
 const TopRank = ({ rank, dateLabel, score, size = 96 }) => (
   <Box sx={{ display: 'flex', alignItems: 'center', flexDirection: 'column', gap: 1 }}>
     <Box sx={{ position: 'relative', color: 'white', p: {margin: 0}, textAlign: 'center' }}>
-
       {/* 랭크 */}
       <Typography variant='h3' sx={{ fontSize: '1.2rem', fontWeight: '700' }}>
         {medalColor[rank]} Place
@@ -40,35 +39,26 @@ const TopRank = ({ rank, dateLabel, score, size = 96 }) => (
 const Row = ({ rank, dateLabel, score, highlight = false }) => (
   <ListItem
     sx={{
-      p: 1.5,
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'space-between',
-      bgcolor: highlight ? 'secondary.main' : 'background.paper',
-      border: highlight ? '2px solid' : '1px solid',
-      borderColor: highlight ? 'primary.main' : 'divider',
-      borderRadius: 2,
+      minHeight: '72px',
+      borderWdith: '1px',
+      borderBottomStyle: 'solid',
+      borderColor: (theme)=>theme.palette.neutrallight.dark,
+      // '.MuiTypography-root': { fontWeight: highlight ? '700' : undefined },
     }}
   >
-    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
-      <Typography
-        sx={{
-          width: 28,
-          textAlign: 'center',
-          color: highlight ? 'text.primary' : 'text.secondary',
-          fontWeight: 800,
-        }}
-      >
+    <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+      <Typography sx={{ width: '30px', fontWeight: 600, textAlign: 'center' }}>
         {rank}
       </Typography>
-
       {/* 날짜만 표기 */}
-      <Typography sx={{ fontWeight: highlight ? 800 : 600 }}>
-        {dateLabel}
+      <Typography>
+        <strong>{dateLabel}</strong>
       </Typography>
     </Box>
-
-    <Typography sx={{ fontWeight: 900, color: 'primary.main' }}>{score}</Typography>
+    <Typography>{score}</Typography>
   </ListItem>
 );
 
@@ -100,7 +90,7 @@ const Leaderboard = () => {
       </Box>
       {/* 1~3위 트로피 그리드 */}
       <AwardScene />
-      <Grid container spacing={1} sx={{ position:'relative', width: {xs:'95%', sm:'80%'}, maxWidth: '500px', margin: {xs: '-150px auto 150px', sm: '-120px auto 0'}, color: 'white'}}>
+      <Grid container spacing={1} sx={{ position:'relative', width: {xs:'95%', sm:'80%'}, maxWidth: '500px', margin: {xs: '-150px auto 90px', sm: '-120px auto 70px'}, color: 'white'}}>
         <Grid size={4}>
           <TopRank rank={podium[0].rank} dateLabel={podium[0].dateLabel} score={podium[0].score} size={80} />
         </Grid>
