@@ -43,7 +43,7 @@ const Row = ({ rank, dateLabel, score, highlight = false }) => (
       alignItems: 'center',
       justifyContent: 'space-between',
       minHeight: '72px',
-      borderWdith: '1px',
+      borderWidth: '1px',
       borderBottomStyle: 'solid',
       borderColor: (theme)=>theme.palette.neutrallight.dark,
       // '.MuiTypography-root': { fontWeight: highlight ? '700' : undefined },
